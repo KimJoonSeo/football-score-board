@@ -1,5 +1,5 @@
 
-export interface ScoreBoard {
+export interface EspnScoreInterface {
     events: Event[]
 }
 
