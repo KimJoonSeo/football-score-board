@@ -28,7 +28,7 @@ function App() {
                 { isSuccess && (
                     <>
                         {data?.events.map((event, i) => (
-                            <ScoreCard home={event.competitions[0].competitors[0]} away={event.competitions[0].competitors[1]} />
+                            <ScoreCard key={i} home={event.competitions[0].competitors[0]} away={event.competitions[0].competitors[1]} status={event.status} startDate={event.competitions[0].startDate}/>
                         ))
                         }
                         <div>{isFetching ? "Background Updating..." : " "}</div>

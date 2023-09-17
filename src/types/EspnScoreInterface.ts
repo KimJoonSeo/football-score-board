@@ -4,19 +4,22 @@ export interface EspnScoreInterface {
 }
 
 export interface Event {
-    status: {
-        type : {
-            completed: boolean;
-            description: string;
-            detail: string;
-            name: string;
-            state: string;
-        }
-    };
+    status: Status;
     competitions: Competition[];
 }
+export interface Status {
+    displayClock: string;
+    type : {
+        completed: boolean;
+        description: string;
+        detail: string;
+        name: string;
+        state: "post" | "in" | "pre";
+    }
+}
 export interface Competition {
-    competitors: Competitor[]
+    startDate: string;
+    competitors: Competitor[];
 }
 export interface Competitor {
     score: string;

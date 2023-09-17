@@ -1,9 +1,11 @@
 import {Avatar, Card, Typography} from "antd";
-import {Competitor} from "../types";
+import {Competitor, Status} from "../types";
 
 interface ScoreCardProps {
     home: Competitor;
     away: Competitor;
+    status: Status;
+    startDate: string;
 }
 
 function Team({team, score, records}: Competitor) {
@@ -21,10 +23,26 @@ function Team({team, score, records}: Competitor) {
         description={`(${records[0].summary})`}
     />;
 };
-export function ScoreCard({home, away}: ScoreCardProps) {
+export function ScoreCard({home, away, status, startDate}: ScoreCardProps) {
+    let title = 'unknown';
+    let style = { color: '' };
+    switch(status.type.state) {
+        case 'pre':
+            title = startDate;
+            style.color = '#b9b7b7';
+            break;
+        case "in":
+            title = status.displayClock;
+            style.color = '#d51d1d';
+            break;
+        case "post":
+            title = status.type.description;
+            break;
+    }
+
     return (
-        <Card>
-            <Team team={home.team} score={home.score} records={home.records}/>
+        <Card title={title} headStyle={style}>
+            <Team team={home.team} score={home.score} records={home.records} />
             <br />
             <Team team={away.team} score={away.score} records={away.records} />
         </Card>
