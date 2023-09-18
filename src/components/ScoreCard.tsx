@@ -1,4 +1,4 @@
-import {Avatar, Card, Col, Row, Spin, Typography} from "antd";
+import {Avatar, Card, Col, Spin, Typography} from "antd";
 import {Competitor, EspnScoreInterface, Status} from "../types";
 import React from "react";
 import axios from "axios";
@@ -64,22 +64,25 @@ export function DashBoard({date, league}: {date: string, league: string}) {
         error, isFetching, isSuccess } = useScoreBoard(date, league);
     return (
         <>
-            { status === "loading" && <Spin />}
+            { (status === "loading" || isFetching) &&
+                <Col span={24}>
+                    <Spin />
+                </Col>
+            }
             { error instanceof Error &&
                 <span>Error: {error.message}</span>
             }
             { isSuccess && (
-                <Row justify="space-between">
+                <>
                     {data?.events.map((event, i) => (
-                        <Col span={12} key={i}>
+                        <Col span={6} key={i}>
                             <ScoreCard home={event.competitions[0].competitors[0]}
                                        away={event.competitions[0].competitors[1]}
                                        status={event.status} />
                         </Col>
                     ))
                     }
-                    <div>{isFetching ? "Background Updating..." : " "}</div>
-                </Row>
+                </>
             )}
         </>
     )
