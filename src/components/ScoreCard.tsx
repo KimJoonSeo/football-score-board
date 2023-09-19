@@ -1,20 +1,16 @@
-import {Avatar, Card, Col, Spin, Typography} from "antd";
-import {Competitor, EspnScoreInterface, Status} from "../types";
+import {Avatar, Card, Typography} from "antd";
+import {Competitor, Status} from "../types";
 import React from "react";
-import axios from "axios";
-import {useQuery} from "@tanstack/react-query";
 
-interface ScoreCardProps {
+interface Props {
     home: Competitor;
     away: Competitor;
     status: Status;
 }
 
-function Team({team, score, records}: Competitor) {
+const Team: React.FC<Competitor> = ({team, score, records}) => {
     return <Card.Meta
-        avatar={<Avatar src={team.logo}
-                        style={{backgroundColor: `#${team.color}`, verticalAlign: 'middle'}}
-                />}
+        avatar={<Avatar src={team.logo}/>}
         title={
             <div className="ant-card-head-wrapper">
                 <div className="ant-card-head-title">{team.abbreviation}</div>
@@ -25,7 +21,7 @@ function Team({team, score, records}: Competitor) {
         description={`(${records[0].summary})`}
     />;
 };
-export function ScoreCard({home, away, status}: ScoreCardProps) {
+const ScoreCard: React.FC<Props> = ({home, away, status}) => {
     let title = 'unknown';
     let style = { color: '' };
     switch(status.type.state) {
@@ -43,47 +39,28 @@ export function ScoreCard({home, away, status}: ScoreCardProps) {
     }
 
     return (
-        <Card title={title} headStyle={style}>
+        <Card>
+            <Typography.Paragraph style={{color: style.color}}>{title}</Typography.Paragraph>
             <Team team={home.team} score={home.score} records={home.records} />
             <br />
             <Team team={away.team} score={away.score} records={away.records} />
         </Card>
     );
 }
-
-function useScoreBoard(date: string, league: string) {
-    const fetchScoreBoard = async (): Promise<EspnScoreInterface> => await axios
-        .get(`https://site.api.espn.com/apis/site/v2/sports/soccer/${league}/scoreboard?dates=${date}&calendartype=blacklist`)
-        .then(res => res.data);
-
-    return useQuery([date, league], fetchScoreBoard);
-}
-
-export function DashBoard({date, league}: {date: string, league: string}) {
-    const { status, data,
-        error, isFetching, isSuccess } = useScoreBoard(date, league);
-    return (
-        <>
-            { (status === "loading" || isFetching) &&
-                <Col span={24}>
-                    <Spin />
-                </Col>
-            }
-            { error instanceof Error &&
-                <span>Error: {error.message}</span>
-            }
-            { isSuccess && (
-                <>
-                    {data?.events.map((event, i) => (
-                        <Col span={6} key={i}>
-                            <ScoreCard home={event.competitions[0].competitors[0]}
-                                       away={event.competitions[0].competitors[1]}
-                                       status={event.status} />
-                        </Col>
-                    ))
-                    }
-                </>
-            )}
-        </>
-    )
-}
+// export const DummyCard: React.FC = () => {
+//     const dummyTeam = {
+//         abbreviation: 's',
+//         color: 's',
+//         alternateColor: 's',
+//         isActive: true,
+//         logo: 's',
+//     }
+//     return (
+//         <Card>
+//             <Team team={dummyTeam} score={'s'} records={[{summary: 's'}]} />
+//             <br />
+//             <Team team={dummyTeam} score={'s'} records={[{summary: 's'}]} />
+//         </Card>
+//     );
+// }
+export default ScoreCard;

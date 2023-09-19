@@ -1,33 +1,45 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Col, DatePicker, DatePickerProps, Layout, Row} from "antd";
+import {Col, DatePicker, DatePickerProps, Layout, Row, Select} from "antd";
 import dayjs from "dayjs";
-import {DashBoard} from "./components/ScoreCard";
+import DashBoard from "./components/DashBoard";
 
-
-function App() {
+const App: React.FC = () => {
     const [date, setDate] = useState<dayjs.Dayjs>(dayjs());
     const [league, setLeague] = useState<string>('eng.1');
 
-    const onChange: DatePickerProps['onChange'] = (date, dateString) => {
+    const onChangeDate: DatePickerProps['onChange'] = (date, dateString) => {
         if(date) {
             setDate(date);
         }
     }
+    const onChangeLeague = (value: string) => {
+        setLeague(value);
+    };
     return (
             <Layout>
-                <Layout.Header>header</Layout.Header>
-                <Layout.Content>
+                {/*<Layout.Header color={'white'}>header</Layout.Header>*/}
+                <Layout.Content style={{minHeight: 600}}>
                     <Row>
-                        <Col span={24}>
-                            <DatePicker onChange={onChange} defaultValue={date} size={'large'} showNow/>
+                        <Col span={12}>
+                            <DatePicker style={{ width: '100%'}}
+                                        onChange={onChangeDate}
+                                        defaultValue={date} size={'large'} showNow/>
+                        </Col>
+                        <Col span={12}>
+                            <Select style={{ width: '100%', height: '100%' }} options={[
+                                { value: 'eng.1', label: '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League' },
+                                { value: 'esp.1', label: '🇪🇸 LaLiga' },
+                                { value: 'ger.1', label: '🇩🇪 Bundesliga' },
+                                { value: 'uefa.champions', label: '🌍 UEFA Champions League' },
+                            ]} onChange={onChangeLeague} defaultValue={'eng.1'} />
                         </Col>
                     </Row>
-                    <Row justify="space-between">
+                    <Row>
                         <DashBoard date={date.format('YYYYMMDD').toString()} league={league} />
                     </Row>
                 </Layout.Content>
-                <Layout.Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Layout.Footer>
+                <Layout.Footer style={{ textAlign: 'center' }}>©Joonseo Kim 2023. All rights reserved.</Layout.Footer>
             </Layout>
     );
 }
