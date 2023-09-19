@@ -26,7 +26,9 @@ const ScoreCard: React.FC<Props> = ({home, away, status}) => {
     let style = { color: '' };
     switch(status.type.state) {
         case 'pre':
-            title = status.type.detail.split('at ')[1];
+            title = status.type.detail.includes('at ')
+                ? status.type.detail.split('at ')[1]
+                : status.type.detail;
             style.color = '#b9b7b7';
             break;
         case "in":
