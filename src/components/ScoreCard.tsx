@@ -21,7 +21,7 @@ const Team: React.FC<Competitor> = ({team, score, records}) => {
         description={`(${records[0].summary})`}
     />;
 };
-const ScoreCard: React.FC<Props> = ({home, away, status}) => {
+export const ScoreCard: React.FC<Props> = ({home, away, status}) => {
     let title = 'unknown';
     let style = { color: '' };
     switch(status.type.state) {
@@ -65,4 +65,3 @@ const ScoreCard: React.FC<Props> = ({home, away, status}) => {
 //         </Card>
 //     );
 // }
-export default ScoreCard;

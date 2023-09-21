@@ -1,54 +1,33 @@
 import {useScoreBoardQuery} from "../hooks/useScoreBoardQuery";
-import {App, Col, Spin} from "antd";
-import React from "react";
-import ScoreCard from "./ScoreCard";
-import {EspnScoreInterface} from "../types";
+import {Col, Spin} from "antd";
+import React, {useEffect} from "react";
+// import ScoreCard from "./ScoreCard";
+import {showMessage, ScoreCard} from "./";
 
 interface Props {
     date: string;
     league: string;
 }
-const DashBoard: React.FC<Props> = ({date, league}) => {
-    const { status, data,
-        error, isFetching, isSuccess } = useScoreBoardQuery(date, league);
-    // const { notification } = App.useApp();
-    // if(error instanceof Error) {
-    //     notification.error(
-    //         {
-    //             message: `Notification`,
-    //             description: error.message,
-    //             placement: 'topLeft',
-    //         });
-    // }
-    // if(isSuccess && data?.events.length == 0 ) {
-    //     notification.info(
-    //         {
-    //             message: `Notification`,
-    //             description: 'There is no match.',
-    //             placement: 'topLeft',
-    //         });
-    // }
+
+export const DashBoard: React.FC<Props> = ({date, league}) => {
+    const { isLoading, error, data } = useScoreBoardQuery(date, league);
+    useEffect(() => {
+        if(error) {
+            showMessage('error', 'An error has occurred while fetching data.');
+        }
+    }, []);
+
+    if(isLoading) return <Spin size={'large'}/>
+
     return (
         <>
-            {/*{ (status === "loading" || isFetching) &&*/}
-            {/*    <Col span={24}>*/}
-            {/*        <Spin />*/}
-            {/*    </Col>*/}
-            {/*}*/}
-            { isSuccess && (
-                <>
-                    {data?.events.map((event, i) => (
-                        <Col span={6} key={i}>
-                            <ScoreCard home={event.competitions[0].competitors[0]}
-                                       away={event.competitions[0].competitors[1]}
-                                       status={event.status} />
-                        </Col>
-                    ))
-                    }
-                </>
-            )}
+            {data?.events.map((event, i) => (
+                <Col span={6} key={i}>
+                    <ScoreCard home={event.competitions[0].competitors[0]}
+                               away={event.competitions[0].competitors[1]}
+                               status={event.status} />
+                </Col>
+            ))}
         </>
     )
 }
-
-export default DashBoard;
