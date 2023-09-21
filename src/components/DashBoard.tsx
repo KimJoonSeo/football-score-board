@@ -1,8 +1,8 @@
 import {useScoreBoardQuery} from "../hooks/useScoreBoardQuery";
 import {Col, Spin} from "antd";
 import React, {useEffect} from "react";
-// import ScoreCard from "./ScoreCard";
 import {showMessage, ScoreCard} from "./";
+import {APIResult} from "../types";
 
 interface Props {
     date: string;
@@ -15,7 +15,10 @@ export const DashBoard: React.FC<Props> = ({date, league}) => {
         if(error) {
             showMessage('error', 'An error has occurred while fetching data.');
         }
-    }, []);
+        if(data?.events.length === 0) {
+            showMessage('info', 'No game today!');
+        }
+    }, [data]);
 
     if(isLoading) return <Spin size={'large'}/>
 

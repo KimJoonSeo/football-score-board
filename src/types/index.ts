@@ -1,4 +1,4 @@
-export interface EspnScoreInterface {
+export interface APIResult {
     events: Event[]
 }
 
