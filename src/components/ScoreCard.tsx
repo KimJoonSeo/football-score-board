@@ -41,7 +41,7 @@ export const ScoreCard: React.FC<Props> = ({home, away, status}) => {
     }
 
     return (
-        <Card>
+        <Card size={'small'}>
             <Typography.Paragraph style={{color: style.color}}>{title}</Typography.Paragraph>
             <Team team={home.team} score={home.score} records={home.records} />
             <br />
@@ -49,19 +49,3 @@ export const ScoreCard: React.FC<Props> = ({home, away, status}) => {
         </Card>
     );
 }
-// export const DummyCard: React.FC = () => {
-//     const dummyTeam = {
-//         abbreviation: 's',
-//         color: 's',
-//         alternateColor: 's',
-//         isActive: true,
-//         logo: 's',
-//     }
-//     return (
-//         <Card>
-//             <Team team={dummyTeam} score={'s'} records={[{summary: 's'}]} />
-//             <br />
-//             <Team team={dummyTeam} score={'s'} records={[{summary: 's'}]} />
-//         </Card>
-//     );
-// }

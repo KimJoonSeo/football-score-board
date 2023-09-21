@@ -22,7 +22,7 @@ const App: React.FC = () => {
     };
     return (
             <Layout>
-                <Layout.Content style={{minHeight: 600}}>
+                <Layout.Content style={{minHeight: 580}}>
                     <Row>
                         <Col span={12}>
                             <DatePicker style={{ width: '100%'}}
@@ -38,7 +38,7 @@ const App: React.FC = () => {
                         <DashBoard date={date.format('YYYYMMDD').toString()} league={league} />
                     </Row>
                 </Layout.Content>
-                <Layout.Footer style={{ textAlign: 'center' }}>©Joonseo Kim 2023. All rights reserved.</Layout.Footer>
+                {/*<Layout.Footer style={{ textAlign: 'center' }}>©Joonseo Kim 2023. All rights reserved.</Layout.Footer>*/}
             </Layout>
     );
 }
