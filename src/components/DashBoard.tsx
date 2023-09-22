@@ -17,7 +17,7 @@ export const DashBoard: React.FC<Props> = ({date, league}) => {
         if(data?.events.length === 0) {
             showMessage('info', 'No game today!');
         }
-    }, [data]);
+    }, [data, error]);
 
     if(isLoading) {
         return (
