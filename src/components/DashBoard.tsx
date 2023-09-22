@@ -1,8 +1,7 @@
-import {useScoreBoardQuery} from "../hooks/useScoreBoardQuery";
+import {useScoreBoardQuery} from "../hooks";
 import {Col, Spin} from "antd";
 import React, {useEffect} from "react";
 import {showMessage, ScoreCard} from "./";
-import {APIResult} from "../types";
 
 interface Props {
     date: string;
