@@ -1,5 +1,5 @@
 import {useScoreBoardQuery} from "../hooks";
-import {Col, Spin} from "antd";
+import {Col, Space, Spin} from "antd";
 import React, {useEffect} from "react";
 import {showMessage, ScoreCard} from "./";
 
@@ -19,7 +19,15 @@ export const DashBoard: React.FC<Props> = ({date, league}) => {
         }
     }, [data]);
 
-    if(isLoading) return <Spin size={'large'}/>
+    if(isLoading) {
+        return (
+            <Space direction="vertical" style={{ width: '100%', padding: '250px' }}>
+                <Spin size={'large'} tip={'Loading'} style={{ width: '100% '}}>
+                    <div />
+                </Spin>
+            </Space>
+        )
+    }
 
     return (
         <>
