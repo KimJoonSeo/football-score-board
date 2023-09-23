@@ -9,7 +9,17 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-const queryClient = new QueryClient();
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            networkMode: 'always'
+        },
+        mutations: {
+            networkMode: 'always'
+        }
+    }
+});
 root.render(
     <QueryClientProvider client={queryClient}>
         <App />
