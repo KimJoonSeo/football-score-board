@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {QueryClient, QueryClientConfig, QueryClientProvider} from "@tanstack/react-query";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const queryClient = new QueryClient({
+const config: QueryClientConfig = {
     defaultOptions: {
         queries: {
             networkMode: 'always'
@@ -19,7 +19,10 @@ const queryClient = new QueryClient({
             networkMode: 'always'
         }
     }
-});
+};
+
+const queryClient = new QueryClient(config);
+
 root.render(
     <QueryClientProvider client={queryClient}>
         <App />

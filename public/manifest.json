@@ -1,7 +1,7 @@
 {
   "name": "European Football Leagues Score",
-  "description": "It provides score boards of european football leagues",
-  "version": "1.0",
+  "description": "Simple dashboard of football box score",
+  "version": "0.1",
   "manifest_version": 3,
   "action": {
     "default_popup": "index.html",
