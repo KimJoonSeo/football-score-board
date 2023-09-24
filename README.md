@@ -1,9 +1,9 @@
-# Getting Started with Create React App
+# Simple European Football leagues Score Board
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application is a kind of chrome extension that shows a simple format of football score board.
 
 ## Available Scripts
-
+ 
 In the project directory, you can run:
 
 ### `npm start`
