@@ -12,6 +12,7 @@ export const useScoreBoardQuery = (date: string, league: string) => {
     return useQuery({
         queryKey: [date, league],
         queryFn: fetchScoreBoard,
-        refetchInterval: intervalMs
+        refetchInterval: intervalMs,
+        refetchIntervalInBackground: true,
     });
 }
