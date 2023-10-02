@@ -1,4 +1,4 @@
-export interface APIResult {
+export interface ScoreBoard {
     events: Event[]
 }
 

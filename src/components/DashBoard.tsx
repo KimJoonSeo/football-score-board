@@ -1,4 +1,4 @@
-import {useScoreBoardQuery} from "../hooks";
+import {useScoreBoardData} from "../hooks";
 import {Col, Space, Spin} from "antd";
 import React, {useEffect} from "react";
 import {showMessage, ScoreCard} from "./";
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const DashBoard: React.FC<Props> = ({date, league}) => {
-    const { isLoading, error, data } = useScoreBoardQuery(date, league);
+    const { isLoading, error, data } = useScoreBoardData(date, league);
     useEffect(() => {
         if(error) {
             showMessage('error', 'An error has occurred while fetching data.');
