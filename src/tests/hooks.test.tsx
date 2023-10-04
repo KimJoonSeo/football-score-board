@@ -1,0 +1,33 @@
+import { rest } from 'msw'
+import { renderHook, waitFor } from '@testing-library/react'
+import {server} from './utils'
+import { createWrapper } from './utils'
+import { useScoreBoardData } from '../hooks'
+
+describe('useScoreBoardData hook', () => {
+    test('do successful query hook', async () => {
+        const { result } = renderHook(() => useScoreBoardData('20230923', 'eng.1'), {
+            wrapper: createWrapper()
+        });
+
+        await waitFor(() => expect(result.current.isSuccess).toBe(true));
+
+        expect(result.current.data?.events[0].competitions[0].competitors[0].records[0].summary).toBe("5-0-2");
+    })
+
+    test('do failure query hook', async () => {
+        server.use(
+            rest.get('*/scoreboard*', (req, res, ctx) => {
+                return res(ctx.status(500))
+            })
+        )
+
+        const { result } = renderHook(() => useScoreBoardData('20230923', 'kor.1'), {
+            wrapper: createWrapper()
+        })
+
+        await waitFor(() => expect(result.current.isError).toBe(true));
+
+        expect(result.current.error).toBeDefined()
+    })
+})
