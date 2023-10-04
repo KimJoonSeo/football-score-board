@@ -3,6 +3,21 @@ import './App.css';
 import {Col, DatePicker, DatePickerProps, Layout, Row, Select} from "antd";
 import dayjs from "dayjs";
 import {DashBoard} from "./components";
+import {QueryClient, QueryClientConfig, QueryClientProvider} from "@tanstack/react-query";
+import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
+
+const config: QueryClientConfig = {
+    defaultOptions: {
+        queries: {
+            networkMode: 'always'
+        },
+        mutations: {
+            networkMode: 'always'
+        }
+    }
+};
+
+const queryClient = new QueryClient(config);
 
 const App: React.FC = () => {
     const [date, setDate] = useState<dayjs.Dayjs>(dayjs());
@@ -14,13 +29,14 @@ const App: React.FC = () => {
         { value: 'uefa.champions', label: '🌍 UEFA Champions League' },
     ];
 
-    const onChangeDate: DatePickerProps['onChange'] = (date, dateString) => {
+    const onChangeDate: DatePickerProps['onChange'] = (date, _dateString) => {
         if(date) setDate(date);
     }
     const onChangeLeague = (value: string) => {
         setLeague(value);
     };
     return (
+        <QueryClientProvider client={queryClient}>
             <Layout>
                 <Layout.Content style={{minHeight: 580}}>
                     <Row>
@@ -38,8 +54,9 @@ const App: React.FC = () => {
                         <DashBoard date={date.format('YYYYMMDD').toString()} league={league} />
                     </Row>
                 </Layout.Content>
-                {/*<Layout.Footer style={{ textAlign: 'center' }}>©Joonseo Kim 2023. All rights reserved.</Layout.Footer>*/}
             </Layout>
+            <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
     );
 }
 
