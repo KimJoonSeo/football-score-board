@@ -1,6 +1,6 @@
 import { rest } from 'msw'
 import { renderHook, waitFor } from '@testing-library/react'
-import {server} from './utils'
+import {mockData, server} from './utils'
 import { createWrapper } from './utils'
 import { useScoreBoardData } from '../hooks'
 
@@ -12,7 +12,7 @@ describe('useScoreBoardData hook', () => {
 
         await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
-        expect(result.current.data?.events[0].competitions[0].competitors[0].records[0].summary).toBe("5-0-2");
+        expect(result.current.data).toStrictEqual(mockData);
     })
 
     test('do failure query hook', async () => {

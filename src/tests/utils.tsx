@@ -4,7 +4,7 @@ import { setupServer } from 'msw/node';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import {ScoreBoard} from "../types";
 
-const mockData: ScoreBoard = {
+export const mockData: ScoreBoard = {
     events: [
         {
             status: {
@@ -77,10 +77,12 @@ afterAll(() => server.close());
 
 const createTestQueryClient = () => new QueryClient({
     defaultOptions: {
+        // Turn off retries not to retry failure requests
         queries: {
             retry: false,
         },
     },
+    // Silence the error console
     logger: {
         log: console.log,
         warn: console.warn,
