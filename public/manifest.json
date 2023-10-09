@@ -12,7 +12,5 @@
     "48": "football.png",
     "128": "football.png"
   },
-  "permissions": [
-    "activeTab"
-  ]
+  "permissions": []
 }
