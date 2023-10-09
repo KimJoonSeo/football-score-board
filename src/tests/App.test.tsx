@@ -1,12 +1,14 @@
 import App from "../App";
-import {renderWithClient, server} from "./utils";
+import {mockData, renderWithClient, server} from "./utils";
 import {screen} from "@testing-library/react";
 import {rest} from "msw";
 
 describe('App component', () => {
     test('successful query component', async () => {
         renderWithClient(<App />)
-        expect(await screen.findByText('(5-0-2)')).toBeInTheDocument();
+        const summary = mockData.events[0].competitions[0].competitors[0].records[0].summary;
+        expect(await screen.findByText('(' + summary + ')'))
+            .toBeInTheDocument();
     });
 
     test('successful query component but data is empty', async () => {
