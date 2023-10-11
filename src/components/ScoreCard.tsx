@@ -8,7 +8,8 @@ interface Props {
     status: Status;
 }
 
-const Team: React.FC<Competitor> = ({team, score, records}) => {
+const Team: React.FC<Competitor> = ({team, score, records, id}) => {
+    const teamId = id;
     return <Card.Meta
         avatar={<Avatar src={team.logo}/>}
         title={
@@ -43,9 +44,9 @@ export const ScoreCard: React.FC<Props> = ({home, away, status}) => {
     return (
         <Card size={'small'}>
             <Typography.Paragraph style={{color: style.color}}>{title}</Typography.Paragraph>
-            <Team team={home.team} score={home.score} records={home.records} />
+            <Team team={home.team} score={home.score} records={home.records} id={home.id}/>
             <br />
-            <Team team={away.team} score={away.score} records={away.records} />
+            <Team team={away.team} score={away.score} records={away.records} id={away.id}/>
         </Card>
     );
 }

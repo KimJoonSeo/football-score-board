@@ -5,7 +5,7 @@ import { createWrapper } from './utils'
 import { useScoreBoardData } from '../hooks'
 
 describe('useScoreBoardData hook', () => {
-    test('successful useScoreBoardData hook', async () => {
+    test('should run useScoreBoardData hook successfully', async () => {
         const { result } = renderHook(() => useScoreBoardData('20230923', 'eng.1'), {
             wrapper: createWrapper()
         });
@@ -13,7 +13,7 @@ describe('useScoreBoardData hook', () => {
         expect(result.current.data).toStrictEqual(mockData);
     })
 
-    test('failure useScoreBoardData hook', async () => {
+    test('should fail to run useScoreBoardData hook', async () => {
         server.use(
             rest.get('*/scoreboard*', (req, res, ctx) => {
                 return res(ctx.status(500))

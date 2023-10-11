@@ -4,14 +4,14 @@ import {screen} from "@testing-library/react";
 import {rest} from "msw";
 
 describe('App component', () => {
-    test('successful query component', async () => {
+    test('should render App successfully', async () => {
         renderWithClient(<App />)
         const summary = mockData.events[0].competitions[0].competitors[0].records[0].summary;
         expect(await screen.findByText('(' + summary + ')'))
             .toBeInTheDocument();
     });
 
-    test('successful query component but data is empty', async () => {
+    test('should render App successfully when data is empty', async () => {
         server.use(
             rest.get(
                 '*/scoreboard*',
@@ -27,7 +27,7 @@ describe('App component', () => {
         expect(await screen.findByText('No game today!')).toBeInTheDocument();
     });
 
-    test('failure query component', async () => {
+    test('should render App successfully when data fetch is failed', async () => {
         server.use(
             rest.get('*/scoreboard*', (req, res, ctx) => {
                 return res(ctx.status(500))

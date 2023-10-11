@@ -19,8 +19,10 @@ export const mockData: ScoreBoard = {
             },
             competitions: [
                 {
+                    details: [],
                     competitors: [
                         {
+                            id: "100",
                             score: "3",
                             records: [{
                                 summary: "5-0-2",
@@ -34,6 +36,7 @@ export const mockData: ScoreBoard = {
                             }
                         },
                         {
+                            id: "101",
                             score: "0",
                             records: [{
                                 summary: "1-5-1",

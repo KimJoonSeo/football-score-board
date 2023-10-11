@@ -19,8 +19,10 @@ export interface Status {
 export interface Competition {
     startDate: string;
     competitors: Competitor[];
+    details: Detail[];
 }
 export interface Competitor {
+    id: string;
     score: string;
     records: [{
         summary: string;
@@ -32,4 +34,23 @@ export interface Competitor {
         isActive: boolean;
         logo: string;
     };
+}
+
+export interface Detail {
+    athletesInvolved : {
+        displayName: string;
+        shortName: string;
+
+    }[];
+    clock: {
+        displayValue: string;
+    }
+    ownGoal: boolean;
+    penaltyKick: boolean;
+    redCard: boolean;
+    yellowCard: boolean;
+    scoreValue: number;
+    team: {
+        id: string;
+    }
 }
