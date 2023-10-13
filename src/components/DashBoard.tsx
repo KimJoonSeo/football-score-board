@@ -33,9 +33,7 @@ export const DashBoard: React.FC<Props> = ({date, league}) => {
         <>
             {data?.events.map((event, i) => (
                 <Col span={6} key={i}>
-                    <ScoreCard home={event.competitions[0].competitors[0]}
-                               away={event.competitions[0].competitors[1]}
-                               status={event.status} />
+                    <ScoreCard status={event.status} competitions={event.competitions}/>
                 </Col>
             ))}
         </>

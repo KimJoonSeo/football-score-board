@@ -1,12 +1,6 @@
 import {Avatar, Card, Typography} from "antd";
-import {Competitor, Status} from "../types";
+import {Competitor, Event} from "../types";
 import React from "react";
-
-interface Props {
-    home: Competitor;
-    away: Competitor;
-    status: Status;
-}
 
 const Team: React.FC<Competitor> = ({team, score, records, id}) => {
     const teamId = id;
@@ -22,9 +16,13 @@ const Team: React.FC<Competitor> = ({team, score, records, id}) => {
         description={`(${records[0].summary})`}
     />;
 };
-export const ScoreCard: React.FC<Props> = ({home, away, status}) => {
+export const ScoreCard: React.FC<Event> = (props) => {
     let title = 'unknown';
     let style = { color: '' };
+    const status = props.status;
+    const home = props.competitions[0].competitors[0];
+    const away = props.competitions[0].competitors[1];
+    const details = props.competitions[0].details;
     switch(status.type.state) {
         case 'pre':
             title = status.type.detail.includes('at ')

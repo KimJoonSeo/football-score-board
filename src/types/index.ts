@@ -50,6 +50,7 @@ export interface Detail {
     redCard: boolean;
     yellowCard: boolean;
     scoreValue: number;
+    scoringPlay: boolean;
     team: {
         id: string;
     }
