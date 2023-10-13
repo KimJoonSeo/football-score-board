@@ -55,3 +55,9 @@ export interface Detail {
         id: string;
     }
 }
+
+export interface ScoringInfo {
+    ownGoal: boolean;
+    penaltyKick: boolean;
+    scorer: string;
+}
