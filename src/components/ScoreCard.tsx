@@ -1,39 +1,28 @@
 import {Avatar, Card, Popover, Typography} from "antd";
 import {Event, ScoringInfo, TeamInfo} from "../types";
 import React from "react";
-import {d} from "msw/lib/glossary-de6278a9";
 
 const Team: React.FC<TeamInfo> = (props) => {
-    if(props.scoringInfoList) {
-        const content = props.scoringInfoList.map((value, index) => {
-            return <p key={index}>{value.displayValue} {value.scorer}</p>
-        })
-        return <Card.Meta
-            avatar={<Avatar src={props.team.logo}/>}
-            title={
-                <div className="ant-card-head-wrapper">
-                    <div className="ant-card-head-title">{props.team.abbreviation}</div>
-                    <div className="ant-card-extra">
-                        <Popover content={<div>{content}</div>}>
-                            <Typography.Text strong underline>
-                                {props.score}
-                            </Typography.Text>
-                        </Popover>
-                    </div>
-                </div>
-            }
-            description={`(${props.records[0].summary})`}
-        />;
-    }
+    const content = props.scoringInfoList.map((value, index) => {
+        return <p key={index}>{value.displayValue} {value.scorer}</p>
+    });
+
     return <Card.Meta
         avatar={<Avatar src={props.team.logo}/>}
         title={
             <div className="ant-card-head-wrapper">
                 <div className="ant-card-head-title">{props.team.abbreviation}</div>
                 <div className="ant-card-extra">
-                    <Typography.Text strong underline>
-                        {props.score}
-                    </Typography.Text>
+                    { props.scoringInfoList.length > 0 ?
+                        <Popover content={<div>{content}</div>}>
+                            <Typography.Text strong underline>
+                                {props.score}
+                            </Typography.Text>
+                        </Popover> :
+                        <Typography.Text strong underline>
+                            {props.score}
+                        </Typography.Text>
+                    }
                 </div>
             </div>
         }
@@ -49,21 +38,21 @@ export const ScoreCard: React.FC<Event> = (props) => {
     const details = props.competitions[0].details;
     const homeScoringInfo: ScoringInfo[] = [];
     const awayScoringInfo: ScoringInfo[] = [];
-    for (const d of details) {
-        if(!d.scoringPlay) continue;
-        if(d.team.id === home.id) {
+    for (const detail of details) {
+        if(!detail.scoringPlay) continue;
+        if(detail.team.id === home.id) {
             homeScoringInfo.push({
-                ownGoal: d.ownGoal,
-                displayValue: d.clock.displayValue,
-                penaltyKick: d.penaltyKick,
-                scorer: d.athletesInvolved[0].shortName
+                ownGoal: detail.ownGoal,
+                displayValue: detail.clock.displayValue,
+                penaltyKick: detail.penaltyKick,
+                scorer: detail.athletesInvolved[0].shortName
             });
         } else {
             awayScoringInfo.push({
-                ownGoal: d.ownGoal,
-                displayValue: d.clock.displayValue,
-                penaltyKick: d.penaltyKick,
-                scorer: d.athletesInvolved[0].shortName,
+                ownGoal: detail.ownGoal,
+                displayValue: detail.clock.displayValue,
+                penaltyKick: detail.penaltyKick,
+                scorer: detail.athletesInvolved[0].shortName,
             });
         }
     }
