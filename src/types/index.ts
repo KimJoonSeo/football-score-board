@@ -36,6 +36,16 @@ export interface Competitor {
     };
 }
 
+export interface ScoringInfo {
+    ownGoal: boolean;
+    penaltyKick: boolean;
+    scorer: string;
+    displayValue: string;
+}
+export interface TeamInfo extends Competitor {
+    scoringInfoList: ScoringInfo[]
+}
+
 export interface Detail {
     athletesInvolved : {
         displayName: string;
@@ -56,8 +66,3 @@ export interface Detail {
     }
 }
 
-export interface ScoringInfo {
-    ownGoal: boolean;
-    penaltyKick: boolean;
-    scorer: string;
-}

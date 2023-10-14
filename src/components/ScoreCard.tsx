@@ -1,19 +1,43 @@
-import {Avatar, Card, Typography} from "antd";
-import {Competitor, Event, ScoringInfo} from "../types";
+import {Avatar, Card, Popover, Typography} from "antd";
+import {Event, ScoringInfo, TeamInfo} from "../types";
 import React from "react";
+import {d} from "msw/lib/glossary-de6278a9";
 
-const Team: React.FC<Competitor> = ({team, score, records, id}) => {
-    const teamId = id;
+const Team: React.FC<TeamInfo> = (props) => {
+    if(props.scoringInfoList) {
+        const content = props.scoringInfoList.map((value, index) => {
+            return <p key={index}>{value.displayValue} {value.scorer}</p>
+        })
+        return <Card.Meta
+            avatar={<Avatar src={props.team.logo}/>}
+            title={
+                <div className="ant-card-head-wrapper">
+                    <div className="ant-card-head-title">{props.team.abbreviation}</div>
+                    <div className="ant-card-extra">
+                        <Popover content={<div>{content}</div>}>
+                            <Typography.Text strong underline>
+                                {props.score}
+                            </Typography.Text>
+                        </Popover>
+                    </div>
+                </div>
+            }
+            description={`(${props.records[0].summary})`}
+        />;
+    }
     return <Card.Meta
-        avatar={<Avatar src={team.logo}/>}
+        avatar={<Avatar src={props.team.logo}/>}
         title={
             <div className="ant-card-head-wrapper">
-                <div className="ant-card-head-title">{team.abbreviation}</div>
-                <div className="ant-card-extra"><Typography.Text strong underline>{score}</Typography.Text>
+                <div className="ant-card-head-title">{props.team.abbreviation}</div>
+                <div className="ant-card-extra">
+                    <Typography.Text strong underline>
+                        {props.score}
+                    </Typography.Text>
                 </div>
             </div>
         }
-        description={`(${records[0].summary})`}
+        description={`(${props.records[0].summary})`}
     />;
 };
 export const ScoreCard: React.FC<Event> = (props) => {
@@ -30,12 +54,14 @@ export const ScoreCard: React.FC<Event> = (props) => {
         if(d.team.id === home.id) {
             homeScoringInfo.push({
                 ownGoal: d.ownGoal,
+                displayValue: d.clock.displayValue,
                 penaltyKick: d.penaltyKick,
-                scorer: d.athletesInvolved[0].shortName,
+                scorer: d.athletesInvolved[0].shortName
             });
         } else {
             awayScoringInfo.push({
                 ownGoal: d.ownGoal,
+                displayValue: d.clock.displayValue,
                 penaltyKick: d.penaltyKick,
                 scorer: d.athletesInvolved[0].shortName,
             });
@@ -61,9 +87,9 @@ export const ScoreCard: React.FC<Event> = (props) => {
     return (
         <Card size={'small'}>
             <Typography.Paragraph style={{color: style.color}}>{title}</Typography.Paragraph>
-            <Team team={home.team} score={home.score} records={home.records} id={home.id}/>
+            <Team team={home.team} score={home.score} records={home.records} id={home.id} scoringInfoList={homeScoringInfo}/>
             <br />
-            <Team team={away.team} score={away.score} records={away.records} id={away.id}/>
+            <Team team={away.team} score={away.score} records={away.records} id={away.id} scoringInfoList={awayScoringInfo}/>
         </Card>
     );
 }
