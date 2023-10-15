@@ -4,7 +4,10 @@ import React from "react";
 
 const Team: React.FC<TeamInfo> = (props) => {
     const content = props.scoringInfoList.map((value, index) => {
-        return <p key={index}>{value.displayValue} {value.scorer}</p>
+        const og = value.ownGoal ? ' OG' : '';
+        const pk = value.penaltyKick ? ' PK' : '';
+
+        return <p key={index}>{value.scorer} ({value.displayValue}{og}{pk})</p>
     });
 
     return <Card.Meta
