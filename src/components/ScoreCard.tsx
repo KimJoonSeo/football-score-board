@@ -7,7 +7,7 @@ const Team: React.FC<TeamInfo> = (props) => {
         const og = value.ownGoal ? ' OG' : '';
         const pk = value.penaltyKick ? ' PK' : '';
 
-        return <p key={index}>{value.scorer} ({value.displayValue}{og}{pk})</p>
+        return <p key={index}>{value.scorer} ({value.displayValue}{og}{pk})</p>;
     });
 
     return <Card.Meta
@@ -17,7 +17,7 @@ const Team: React.FC<TeamInfo> = (props) => {
                 <div className="ant-card-head-title">{props.team.abbreviation}</div>
                 <div className="ant-card-extra">
                     { props.scoringInfoList.length > 0 ?
-                        <Popover content={<div>{content}</div>}>
+                        <Popover content={<div>{content}</div>} placement={'leftTop'}>
                             <Typography.Text strong underline>
                                 {props.score}
                             </Typography.Text>

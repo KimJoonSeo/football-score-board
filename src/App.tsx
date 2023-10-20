@@ -3,10 +3,10 @@ import './App.css';
 import {Avatar, Col, DatePicker, DatePickerProps, Layout, Row, Select} from "antd";
 import dayjs from "dayjs";
 import {DashBoard} from "./components";
-import ucl from "./resources/ucl.png";
-import bundesliga from "./resources/bundesliga.png";
-import laliga from "./resources/laliga.png";
-import epl from "./resources/epl.png";
+import ucl from "./resources/images/ucl.png";
+import bundesliga from "./resources/images/bundesliga.png";
+import laliga from "./resources/images/laliga.png";
+import epl from "./resources/images/epl.png";
 
 const LeagueOption: React.FC<{image: string, name: string}> = ({image, name}) => (
     <>
