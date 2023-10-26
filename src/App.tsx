@@ -15,6 +15,8 @@ import ucl from './resources/images/ucl.png'
 import bundesliga from './resources/images/bundesliga.png'
 import laliga from './resources/images/laliga.png'
 import epl from './resources/images/epl.png'
+import seriea from './resources/images/seriea.png'
+import ligue1 from './resources/images/ligue1.png'
 
 const LeagueOption: React.FC<{ image: string; name: string }> = ({
   image,
@@ -42,6 +44,14 @@ const App: React.FC = () => {
     {
       value: 'ger.1',
       label: <LeagueOption image={bundesliga} name={'Bundesliga'} />,
+    },
+    {
+      value: 'ita.1',
+      label: <LeagueOption image={seriea} name={'Serie A'} />,
+    },
+    {
+      value: 'fra.1',
+      label: <LeagueOption image={ligue1} name={'Ligue 1'} />,
     },
     {
       value: 'uefa.champions',
