@@ -9,6 +9,11 @@ describe('DashBoard', () => {
         const loadingElement = screen.getByText(/Loading/)
         expect(loadingElement).toBeInTheDocument()
     })
+    test('renders a DashBoard component successfully', async () => {
+        renderWithClient(<DashBoard date={'20231021'} league={'eng.1'}/>)
+        const element = await screen.findByText(/Full Time/)
+        expect(element).toBeInTheDocument()
+    })
     test('renders an error message', async () => {
         server.use(
             rest.get('*/scoreboard*', (req, res, ctx) => {

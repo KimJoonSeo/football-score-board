@@ -70,7 +70,6 @@ export const ScoreCard: React.FC<Event> = (props) => {
       })
     }
   }
-  console.log(homeScoringInfo, awayScoringInfo)
   switch (status.type.state) {
     case 'pre':
       title = status.type.detail.includes('at ')
