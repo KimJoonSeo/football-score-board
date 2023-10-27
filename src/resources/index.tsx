@@ -1,5 +1,5 @@
-import Icon from '@ant-design/icons';
-import { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
+import Icon from '@ant-design/icons'
+import { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon'
 const FootballSvg = () => (
   <svg viewBox="0 0 1024 1024" width="1em" height="1em">
     <g
@@ -67,5 +67,5 @@ l-211 -650 129 -129 128 -128 514 32 c283 17 523 35 535 40 45 18 206 430 252
   </svg>
 )
 export const FootballIcon = (props: Partial<CustomIconComponentProps>) => (
-    <Icon component={FootballSvg} {...props} />
-);
+  <Icon component={FootballSvg} {...props} />
+)

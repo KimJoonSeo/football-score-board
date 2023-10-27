@@ -1,7 +1,7 @@
 import { Avatar, Card, Popover, Typography } from 'antd'
 import { Event, ScoringInfo, TeamInfo } from '../types'
 import React from 'react'
-import {FootballIcon} from "../resources";
+import { FootballIcon } from '../resources'
 
 const Team: React.FC<TeamInfo> = (props) => {
   const content = props.scoringInfoList.map((value, index) => {
