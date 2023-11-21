@@ -13,9 +13,6 @@ jobs:
 
     - name: Check out code
       uses: actions/checkout@v1
-
-    - name: Build ${{ env.FILE_NAME }} for ubuntu-latest
-      run: go build ${{ env.FILE_NAME }}.go
       
     - name: Upload artifact for linux
       uses: actions/upload-artifact@v1.0.0
