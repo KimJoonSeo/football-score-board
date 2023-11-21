@@ -59,3 +59,4 @@ func main() {
 	httpServerExitDone.Wait()
 
 	log.Printf("main: done. exiting")
+}
