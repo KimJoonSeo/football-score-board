@@ -38,6 +38,8 @@ const LeagueOption: React.FC<{ image: string; name: string }> = ({
 const App: React.FC = () => {
   const [date, setDate] = useState<dayjs.Dayjs>(dayjs())
   const [league, setLeague] = useState<string>('eng.1')
+  const [page, setPage] = useState<number>(0)
+  const [totalPage, setTotalPage] = useState<number>(0)
   const leagueOptions = [
     {label: 'Nation', options: [
         {
@@ -103,9 +105,10 @@ const App: React.FC = () => {
               defaultValue={'eng.1'}
             />
           </Col>
-            <Col span={6}>
-                <Pagination simple defaultCurrent={2} total={50} style={{ width: '100%', height: '100%' }}/>
-            </Col>
+          <Col span={6}>
+            <Pagination simple defaultCurrent={page} total={totalPage}
+                        style={{ width: '100%', height: '100%' }} pageSize={12}/>
+          </Col>
         </Row>
         <Row>
           <DashBoard
