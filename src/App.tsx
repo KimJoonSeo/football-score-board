@@ -6,6 +6,7 @@ import {
   DatePicker,
   DatePickerProps,
   Layout,
+    Pagination,
   Row,
   Select,
 } from 'antd'
@@ -83,9 +84,9 @@ const App: React.FC = () => {
   }
   return (
     <Layout>
-      <Layout.Content style={{ minHeight: 580 }}>
+      <Layout.Content style={{ height: 580 }}>
         <Row>
-          <Col span={12}>
+          <Col span={6}>
             <DatePicker
               style={{ width: '100%' }}
               onChange={onChangeDate}
@@ -102,6 +103,9 @@ const App: React.FC = () => {
               defaultValue={'eng.1'}
             />
           </Col>
+            <Col span={6}>
+                <Pagination simple defaultCurrent={2} total={50} style={{ width: '100%', height: '100%' }}/>
+            </Col>
         </Row>
         <Row>
           <DashBoard
