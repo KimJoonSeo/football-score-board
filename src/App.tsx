@@ -6,7 +6,7 @@ import {
   DatePicker,
   DatePickerProps,
   Layout,
-    Pagination,
+  Pagination,
   Row,
   Select,
 } from 'antd'
@@ -39,7 +39,7 @@ const App: React.FC = () => {
   const [date, setDate] = useState<dayjs.Dayjs>(dayjs())
   const [league, setLeague] = useState<string>('eng.1')
   const [page, setPage] = useState<number>(0)
-  const [totalPage, setTotalPage] = useState<number>(0)
+  const [total, setTotal] = useState<number>(26)
   const leagueOptions = [
     {label: 'Nation', options: [
         {
@@ -88,7 +88,7 @@ const App: React.FC = () => {
     <Layout>
       <Layout.Content style={{ height: 580 }}>
         <Row>
-          <Col span={6}>
+          <Col span={12}>
             <DatePicker
               style={{ width: '100%' }}
               onChange={onChangeDate}
@@ -105,10 +105,6 @@ const App: React.FC = () => {
               defaultValue={'eng.1'}
             />
           </Col>
-          <Col span={6}>
-            <Pagination simple defaultCurrent={page} total={totalPage}
-                        style={{ width: '100%', height: '100%' }} pageSize={12}/>
-          </Col>
         </Row>
         <Row>
           <DashBoard
@@ -117,6 +113,9 @@ const App: React.FC = () => {
           />
         </Row>
       </Layout.Content>
+        <Layout.Footer style={{textAlign: 'center', padding: 0}}>
+            <Pagination defaultCurrent={0} total={0} pageSize={12}/>
+        </Layout.Footer>
     </Layout>
   )
 }
