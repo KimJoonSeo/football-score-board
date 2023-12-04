@@ -1,7 +1,8 @@
 import { useScoreBoardData } from '../hooks'
 import { Col, Space, Spin } from 'antd'
-import React, { useEffect } from 'react'
+import React, {useContext, useEffect} from 'react'
 import { showMessage, ScoreCard } from './'
+import {PaginationContext} from "../contexts";
 
 interface Props {
   date: string
@@ -10,12 +11,21 @@ interface Props {
 
 export const DashBoard: React.FC<Props> = ({ date, league }) => {
   const { isLoading, error, data } = useScoreBoardData(date, league)
+  const {state, actions} = useContext(PaginationContext)
+
   useEffect(() => {
     if (error) {
+      actions.setCurrentPage(1)
+      actions.setTotalCount(1)
       showMessage('error', 'An error has occurred while fetching data.')
     }
     if (data?.events.length === 0) {
+      actions.setCurrentPage(1)
+      actions.setTotalCount(1)
       showMessage('info', 'No game today!')
+    } else {
+      actions.setCurrentPage(1)
+      actions.setTotalCount(data?.events.length)
     }
   }, [data, error])
 
