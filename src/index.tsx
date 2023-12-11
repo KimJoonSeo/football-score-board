@@ -9,6 +9,7 @@ import {
   QueryClientConfig,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import {PaginationProvider} from "./contexts";
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
@@ -27,7 +28,9 @@ const queryClient = new QueryClient(config)
 
 root.render(
   <QueryClientProvider client={queryClient}>
-    <App />
+    <PaginationProvider>
+      <App />
+    </PaginationProvider>
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>,
 )

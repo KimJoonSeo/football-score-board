@@ -6,7 +6,6 @@ import {
   DatePicker,
   DatePickerProps,
   Layout,
-  Pagination,
   Row,
   Select,
 } from 'antd'
@@ -21,6 +20,7 @@ import ligue1 from './resources/images/ligue1.png'
 import europa from './resources/images/europa.png'
 import conference from './resources/images/conference.png'
 import {PaginationContext, PaginationProvider} from "./contexts";
+import Footer from "./components/Footer";
 
 const LeagueOption: React.FC<{ image: string; name: string }> = ({
   image,
@@ -39,7 +39,7 @@ const LeagueOption: React.FC<{ image: string; name: string }> = ({
 const App: React.FC = () => {
   const [date, setDate] = useState<dayjs.Dayjs>(dayjs())
   const [league, setLeague] = useState<string>('eng.1')
-  const {state, actions} = useContext(PaginationContext);
+  const { state, actions} = useContext(PaginationContext)
   const leagueOptions = [
     {label: 'Nation', options: [
         {
@@ -85,7 +85,6 @@ const App: React.FC = () => {
     setLeague(value)
   }
   return (
-      <PaginationProvider>
     <Layout>
       <Layout.Content style={{ height: 580 }}>
         <Row>
@@ -114,12 +113,8 @@ const App: React.FC = () => {
           />
         </Row>
       </Layout.Content>
-        <Layout.Footer style={{textAlign: 'center', padding: 0}}>
-            <Pagination defaultCurrent={state.currentPage} total={state.totalCount}
-                        pageSize={12} onChange={page => {actions.setCurrentPage(page)}}/>
-        </Layout.Footer>
+        <Footer />
     </Layout>
-      </PaginationProvider>
   )
 }
 

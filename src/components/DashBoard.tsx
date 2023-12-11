@@ -11,21 +11,20 @@ interface Props {
 
 export const DashBoard: React.FC<Props> = ({ date, league }) => {
   const { isLoading, error, data } = useScoreBoardData(date, league)
-  const {state, actions} = useContext(PaginationContext)
+  const { state, actions} = useContext(PaginationContext)
 
   useEffect(() => {
+    actions.setCurrentPage(1)
+    actions.setTotalCount(data?.events.length)
     if (error) {
-      actions.setCurrentPage(1)
-      actions.setTotalCount(1)
       showMessage('error', 'An error has occurred while fetching data.')
     }
     if (data?.events.length === 0) {
-      actions.setCurrentPage(1)
-      actions.setTotalCount(1)
       showMessage('info', 'No game today!')
-    } else {
+    } else if (typeof data?.events !== 'undefined') {
       actions.setCurrentPage(1)
       actions.setTotalCount(data?.events.length)
+      console.log('test')
     }
   }, [data, error])
 
@@ -42,9 +41,11 @@ export const DashBoard: React.FC<Props> = ({ date, league }) => {
   return (
     <>
       {data?.events.map((event, i) => (
+          i >= (state.currentPage-1)*12 && i < state.currentPage*12 ?
         <Col span={6} key={i}>
           <ScoreCard status={event.status} competitions={event.competitions} />
         </Col>
+              : null
       ))}
     </>
   )
