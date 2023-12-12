@@ -14,18 +14,20 @@ export const DashBoard: React.FC<Props> = ({ date, league }) => {
   const { state, actions} = useContext(PaginationContext)
 
   useEffect(() => {
-    // actions.setCurrentPage(1)
-    // actions.setTotalCount(data?.events.length)
     if (error) {
+      actions.setCurrentPage(1)
+      actions.setTotalCount(1)
       showMessage('error', 'An error has occurred while fetching data.')
     }
     if (data?.events.length === 0) {
+      actions.setCurrentPage(1)
+      actions.setTotalCount(1)
       showMessage('info', 'No game today!')
     } else if (typeof data?.events !== 'undefined') {
       actions.setCurrentPage(1)
       actions.setTotalCount(data?.events.length)
     }
-  }, [data, error, actions])
+  }, [data, error])
 
   if (isLoading) {
     return (

@@ -19,7 +19,6 @@ import seriea from './resources/images/seriea.png'
 import ligue1 from './resources/images/ligue1.png'
 import europa from './resources/images/europa.png'
 import conference from './resources/images/conference.png'
-import {PaginationContext, PaginationProvider} from "./contexts";
 import Footer from "./components/Footer";
 
 const LeagueOption: React.FC<{ image: string; name: string }> = ({
@@ -39,9 +38,8 @@ const LeagueOption: React.FC<{ image: string; name: string }> = ({
 const App: React.FC = () => {
   const [date, setDate] = useState<dayjs.Dayjs>(dayjs())
   const [league, setLeague] = useState<string>('eng.1')
-  const { state, actions} = useContext(PaginationContext)
   const leagueOptions = [
-    {label: 'Nation', options: [
+    {label: 'National Leagues', options: [
         {
           value: 'eng.1',
           label: <LeagueOption image={epl} name={'Premier League'} />,
@@ -86,7 +84,7 @@ const App: React.FC = () => {
   }
   return (
     <Layout>
-      <Layout.Content style={{ height: 580 }}>
+      <Layout.Content style={{ height: 548 }}>
         <Row>
           <Col span={12}>
             <DatePicker

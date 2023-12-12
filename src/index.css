@@ -7,3 +7,7 @@ body {
   width: 700px;
   /*height: 580px;*/
 }
+.ant-card-small >.ant-card-body {
+  padding-bottom: 6px;
+  padding-top: 6px;
+}
