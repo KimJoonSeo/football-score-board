@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
     const { state, actions} = useContext(PaginationContext)
     return (
         <Layout.Footer style={{textAlign: 'center', padding: 0}}>
-            <Pagination defaultCurrent={state.currentPage} total={state.totalCount}
+            <Pagination defaultCurrent={1} total={state.totalCount} current={state.currentPage}
                         pageSize={12} onChange={page => {actions.setCurrentPage(page)}}/>
         </Layout.Footer>
     )

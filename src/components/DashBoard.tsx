@@ -14,8 +14,8 @@ export const DashBoard: React.FC<Props> = ({ date, league }) => {
   const { state, actions} = useContext(PaginationContext)
 
   useEffect(() => {
-    actions.setCurrentPage(1)
-    actions.setTotalCount(data?.events.length)
+    // actions.setCurrentPage(1)
+    // actions.setTotalCount(data?.events.length)
     if (error) {
       showMessage('error', 'An error has occurred while fetching data.')
     }
@@ -24,9 +24,8 @@ export const DashBoard: React.FC<Props> = ({ date, league }) => {
     } else if (typeof data?.events !== 'undefined') {
       actions.setCurrentPage(1)
       actions.setTotalCount(data?.events.length)
-      console.log('test')
     }
-  }, [data, error])
+  }, [data, error, actions])
 
   if (isLoading) {
     return (
