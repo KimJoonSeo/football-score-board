@@ -1,7 +1,7 @@
 import {createContext, useState} from "react";
 
-const setCurrentPage: any = () => {}
-const setTotalCount: any = () => {}
+const setCurrentPage: React.Dispatch<React.SetStateAction<number>> = () => {}
+const setTotalCount: React.Dispatch<React.SetStateAction<number>> = () => {}
 const PaginationContext = createContext({
     state: { currentPage: 1, totalCount: 1},
     actions: {

@@ -19,10 +19,11 @@ export const DashBoard: React.FC<Props> = ({ date, league }) => {
     if (error) {
       showMessage('error', 'An error has occurred while fetching data.')
     }
-    if (data?.events.length === 0) {
-      showMessage('info', 'No game today!')
-    } else if (typeof data?.events !== 'undefined') {
-      actions.setTotalCount(data?.events.length)
+    if (data?.events instanceof Array<Event>) {
+      if(data.events.length === 0) {
+        showMessage('info', 'No game today!')
+      }
+      actions.setTotalCount(data.events.length)
     }
   }, [data, error])
 
