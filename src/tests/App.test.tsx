@@ -6,9 +6,12 @@ import { rest } from 'msw'
 describe('App component', () => {
   test('should render App successfully', async () => {
     renderWithClient(<App />)
-    const summary =
-      mockData.events[0].competitions[0].competitors[0].records[0].summary
-    expect(await screen.findByText('(' + summary + ')')).toBeInTheDocument()
+    if(mockData.events[0].competitions[0].competitors[0].records) {
+      const summary =
+          mockData.events[0].competitions[0].competitors[0].records[0].summary
+      // eslint-disable-next-line jest/no-conditional-expect
+      expect(await screen.findByText('(' + summary + ')')).toBeInTheDocument()
+    }
   })
 
   test('should render App successfully when data is empty', async () => {

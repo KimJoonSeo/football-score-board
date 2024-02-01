@@ -24,7 +24,7 @@ export interface Competition {
 export interface Competitor {
   id: string
   score: string
-  records: [
+  records?: [
     {
       summary: string
     },

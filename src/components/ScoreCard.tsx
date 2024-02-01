@@ -39,7 +39,7 @@ const Team: React.FC<TeamInfo> = (props) => {
           </div>
         </div>
       }
-      description={`(${props.records[0].summary})`}
+      description={`(${props.records ? props.records[0].summary : '0-0-0'})`}
     />
   )
 }
